@@ -1,0 +1,25 @@
+{
+  "name": "IPromise",
+  "version": "1.0.0",
+  "description": "Achieve promise again",
+  "main": "index.js",
+  "repository": "git@github.com:AsceticBoy/IPromise.git",
+  "author": "Ascetic <398121373@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "prettier": "^1.8.2",
+    "promises-aplus-tests": "^2.1.2",
+    "rollup": "^0.51.5"
+  },
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "{src}/**/*.js": [
+      "prettier --with-node-modules --single-quote --trailing-comma es5 --write",
+      "git add"
+    ]
+  }
+}

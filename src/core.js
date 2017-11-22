@@ -1,16 +1,6 @@
 'use strict'
 
-const Constants = require('./constants')
-
-function noop() { }
-
-function isFunction(func) {
-  return typeof func === 'function'
-}
-
-function isObject(obj) {
-  return typeof obj === 'object'
-}
+let Shared = require('./shared.js')
 
 module.exports = IPromise
 
@@ -23,19 +13,19 @@ module.exports = IPromise
  */
 function IPromise(executor) {
   const self = this
-  if (!isObject(self)) {
+  if (!Shared.isObject(self)) {
     throw new TypeError('IPromise must be a object')
   }
-  if (!isFunction(executor)) {
+  if (!Shared.isFunction(executor)) {
     throw new TypeError('executor must be a function')
   }
-  this.currentState = Constants.PENDING // default
+  this.currentState = Shared.PENDING // default
   this.valOonrErr = null // if fulfilled result to it else rejected error to it
   this.onFulfilledCallback = [] // if current state PENDING push the func wait onFulfilled to exec
   this.onRejectedCallback = [] // if current state PENDING push the func wait onRejected to exec
   
   // safely executor when executor not a empty function
-  if (noop !== executor) {
+  if (Shared.noop !== executor) {
     safelyToExecutor(self, executor) 
   }
 }
@@ -76,7 +66,7 @@ function safelyToExecutor(self, executor) {
 function safelyToThen(maybeThenable) {
   // Promise Standard 2.3.3.1
   let then = maybeThenable && maybeThenable.then
-  if (maybeThenable && (isFunction(maybeThenable) || isObject(maybeThenable)) && isFunction(then)) {
+  if (maybeThenable && (Shared.isFunction(maybeThenable) || Shared.isObject(maybeThenable)) && Shared.isFunction(then)) {
     return function applyThen() {
       then.apply(maybeThenable, arguments)
     }
@@ -98,7 +88,7 @@ function doResolve(result) {
       safelyToExecutor(this, then)
     } else {
       // commonly case
-      this.currentState = Constants.FULFILLED
+      this.currentState = Shared.FULFILLED
       this.valOrErr = result
       for (let i = 0; i < this.onFulfilledCallback.length; i++) {
         this.onFulfilledCallback[i](result)
@@ -110,7 +100,7 @@ function doResolve(result) {
 }
 
 function doReject(error) {
-  this.currentState = Constants.REJECTED
+  this.currentState = Shared.REJECTED
   this.valOrErr = error
   for (let i = 0; i < this.onRejectedCallback.length; i++) {
     this.onRejectedCallback[i](error)
@@ -144,7 +134,7 @@ IPromise.prototype.then = function (onFulfilled, onRejected) {
    * self.constructor otherwise IPromise --> different Promise implement need communicate to each other
    * noop --> only new a 'Promise' then inject currentState/valOrErr etc...
    */
-  let ownerPromise = new self.constructor(noop)
+  let ownerPromise = new self.constructor(Shared.noop)
 
   /**
    * Value Penetration
@@ -155,11 +145,11 @@ IPromise.prototype.then = function (onFulfilled, onRejected) {
    *     .then((data) => {console.log(data)})
    * Value Penetration means log '8' otherwise 'undefined'
    */
-  onFulfilled = isFunction(onFulfilled) ? onFulfilled : function(val) { return val }
-  onRejected = isFunction(onRejected) ? onRejected : function(err) { throw err }
+  onFulfilled = Shared.isFunction(onFulfilled) ? onFulfilled : function(val) { return val }
+  onRejected = Shared.isFunction(onRejected) ? onRejected : function(err) { throw err }
 
-  if (self.currentState !== Constants.PENDING) {
-    let func = self.currentState === Constants.FULFILLED ? onFulfilled : onRejected
+  if (self.currentState !== Shared.PENDING) {
+    let func = self.currentState === Shared.FULFILLED ? onFulfilled : onRejected
     // valOrErr stable self's status or func's thenable determine it's status
     asyncToResolveOrReject(ownerPromise, func, self.valOonrErr)
   } else {

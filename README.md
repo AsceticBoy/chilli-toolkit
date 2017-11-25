@@ -8,7 +8,7 @@
 
 ## Tip
 
-**Current version never provide other implement form ECMAScript Standard toggle support**
+**Current version never support other implement form ECMAScript Standard toggle**
 
 
 

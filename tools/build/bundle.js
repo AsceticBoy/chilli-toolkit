@@ -8,6 +8,7 @@ var fse = require('fs-extra')
 var rollup = require('rollup')
 var nodeResolve = require('rollup-plugin-node-resolve')
 var commonjs = require('rollup-plugin-commonjs') // commonjs -> es2015
+var compiler = require('google-closure-compiler-js').compile
 
 // output bundle environment
 switch (process.env.NODE_ENV) {
@@ -49,6 +50,48 @@ module.exports = {
   format
 }
 
+/**
+ * prod bundle file ( min.js sourcemap )
+ * 
+ * @param { String } entry 
+ * @param { String } output 
+ * @param { String } name 
+ */
+function bundle(entry, output, name) {
+  rollup.rollup({
+    input: path.resolve(process.cwd(), entry),
+    plugins: plugins
+  }).then((bundle) => {
+    return bundle.generate({
+      format: format(),
+      name: name,
+      sourcemap: true
+    })
+  }).then(({ code, map}) => {
+    return write(path.resolve(process.cwd(), output), code)
+  }).then(() => {
+    var source = fs.readFileSync(path.resolve(process.cwd(), output), 'utf-8', (err) => { throw err })
+    var compilerFlags = {
+      jsCode: [{ src: source }],
+      compilationLevel: 'ADVANCED',
+      languageOut: 'ECMASCRIPT5',
+      createSourceMap: true
+    }
+    var result = compiler(compilerFlags)
+    var minPath = 'bundle/' + output.split('/').pop().split('.')[1] + '.min.js'
+    var sourcePath = minPath + '.map'
+    // write min.js and min.js.map
+    fs.writeFileSync(minPath, result.compiledCode, 'utf-8', (err) => { throw err })
+    fs.writeFileSync(sourcePath, result.sourceMap, 'utf-8', (err) => { throw err })
+    console.info(chalk.red(minPath) + ' ' + chalk.green(getSize(result.compiledCode)))
+  }).catch((err) => {
+    console.error(err)
+  })
+}
+
+/**
+ * output format type
+ */
 function format() {
   var format = 'es' // default
   var args = process.argv.slice(2)
@@ -63,23 +106,6 @@ function format() {
   return format
 }
 
-function bundle(entry, output, name) {
-  rollup.rollup({
-    input: path.resolve(process.cwd(), entry),
-    plugins: plugins
-  }).then((bundle) => {
-    return bundle.generate({
-      format: format(),
-      name: name,
-      sourcemap: true
-    })
-  }).then(({ code, map}) => {
-    return write(path.resolve(process.cwd(), output), code)
-  }).catch((err) => {
-    console.error(err)
-  })
-}
-
 /**
  * Write code in dir path
  * 
@@ -90,7 +116,7 @@ function write(dir, code) {
   return new Promise(function (resolve, reject) {
     fse.ensureFile(dir, (err) => {
       if (err) return reject(err)
-      fs.writeFile(dir, code, (err) => {
+      fs.writeFile(dir, code, 'utf-8', (err) => {
         if (err) {
           return reject(err)
         }

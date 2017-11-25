@@ -11,6 +11,7 @@
     "chalk": "^2.3.0",
     "cross-env": "^5.1.1",
     "fs-extra": "^4.0.2",
+    "google-closure-compiler-js": "^20170910.0.1",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
     "prettier": "^1.8.2",
@@ -23,8 +24,8 @@
     "rollup-plugin-uglify": "^2.0.1"
   },
   "scripts": {
-    "dev": " rm -rf ./bundle && cross-env NODE_ENV=DEV node ./tools/build/rollup.dev.js --format:iife",
-    "build": "cross-env NODE_ENV=PROD rollup -c ./tools/build/rollup.prod.js",
+    "dev": " cross-env NODE_ENV=DEV node ./tools/build/rollup.dev.js",
+    "build": "rm -rf ./bundle && cross-env NODE_ENV=PROD node ./tools/build/rollup.prod.js --format:iife",
     "precommit": "lint-staged"
   },
   "lint-staged": {

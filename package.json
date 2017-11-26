@@ -7,7 +7,6 @@
   "author": "Ascetic <398121373@qq.com>",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.18.13",
     "chai": "^4.1.2",
     "chalk": "*",
     "cross-env": "^5.1.1",
@@ -19,7 +18,6 @@
     "prettier": "^1.8.2",
     "promises-aplus-tests": "^2.1.2",
     "rollup": "^0.51.5",
-    "rollup-plugin-browsersync": "^0.2.6",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-node-resolve": "^3.0.0",

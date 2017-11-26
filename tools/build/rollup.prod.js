@@ -2,4 +2,4 @@
 
 var bundle = require('./bundle')
 
-bundle.bundle('src/index', 'bundle/chilli.IPromise.js', 'chilli_IPromise')
+bundle.bundle('lib/ipromise/index', 'bundle/chilli.ipromise.js', 'chillipromise')

@@ -1,4 +1,8 @@
-# Overview
+# chilli
+
+A persomal toolkit achieve common modules again include promise, stream, etc...
+
+## Modules
 
 `IPromise` Achieve promise again
 
@@ -9,6 +13,10 @@
 ## Tip
 
 **Current version never support other implement form ECMAScript Standard toggle**
+
+## LICENSE
+
+MIT
 
 
 

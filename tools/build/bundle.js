@@ -78,7 +78,7 @@ function bundle(entry, output, name) {
       createSourceMap: true
     }
     var result = compiler(compilerFlags)
-    var minPath = 'bundle/' + output.split('/').pop().split('.')[1] + '.min.js'
+    var minPath = 'bundle/' + output.split('/').pop().split('.')[0] + '.min.js'
     var sourcePath = minPath + '.map'
     // write min.js and min.js.map
     fs.writeFileSync(minPath, result.compiledCode, 'utf-8', (err) => { throw err })

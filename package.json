@@ -1,20 +1,30 @@
 {
-  "name": "IPromise",
+  "name": "chilli",
   "version": "1.0.0",
-  "description": "Achieve promise again",
+  "description": "A persomal toolkit achieve common modules again",
   "main": "index.js",
-  "repository": "git@github.com:AsceticBoy/IPromise.git",
+  "keywords": [
+    "promise",
+    "rollup"
+  ],
+  "repository": "git@github.com:AsceticBoy/chilli.git",
   "author": "Ascetic <398121373@qq.com>",
   "license": "MIT",
+  "files": [
+    "lib",
+    "bundle"
+  ],
   "devDependencies": {
     "chai": "^4.1.2",
     "chalk": "*",
+    "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
     "fs-extra": "^4.0.2",
     "google-closure-compiler-js": "^20170910.0.1",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
     "mocha": "*",
+    "nyc": "^11.3.0",
     "prettier": "^1.8.2",
     "promises-aplus-tests": "^2.1.2",
     "rollup": "^0.51.5",
@@ -26,7 +36,9 @@
   "scripts": {
     "dev": " cross-env NODE_ENV=DEV node ./tools/build/rollup.dev.js",
     "build": "rm -rf ./bundle && cross-env NODE_ENV=PROD node ./tools/build/rollup.prod.js --format:iife",
-    "test": "mocha test/**/*.test.js --bail --timeout 200 --slow 99999 --reporter spec",
+    "test": "nyc --reporter text mocha test/**/*.test.js --bail --timeout 200 --slow 99999",
+    "report": "nyc report --reporter html",
+    "coverage": "nyc report --reporter text-lcov | coveralls",
     "precommit": "lint-staged"
   },
   "lint-staged": {

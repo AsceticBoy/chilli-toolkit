@@ -37,8 +37,8 @@
     "dev": " cross-env NODE_ENV=DEV node ./tools/build/rollup.dev.js",
     "build": "rm -rf ./bundle && cross-env NODE_ENV=PROD node ./tools/build/rollup.prod.js --format:iife",
     "test": "nyc --reporter text mocha test/**/*.test.js --bail --timeout 200 --slow 99999",
-    "report": "nyc report --reporter html",
-    "coverage": "nyc report --reporter text-lcov | coveralls",
+    "report": "npm run test && rm -rf ./coverage && nyc report --reporter html",
+    "coverage": "npm run test && rm -rf ./coverage && nyc report --reporter lcov | coveralls",
     "precommit": "lint-staged"
   },
   "lint-staged": {

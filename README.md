@@ -5,6 +5,12 @@
 
 A persomal toolkit achieve common modules again include promise, stream, etc...
 
+## Quick Start
+
+```js
+npm install chilli-toolkit
+```
+
 ## Modules
 
 `IPromise` Achieve promise again

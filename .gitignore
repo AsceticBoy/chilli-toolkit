@@ -4,6 +4,5 @@ node_modules
 # others
 *.log
 .DS_Store
-.nyc_output
 bundle
 coverage

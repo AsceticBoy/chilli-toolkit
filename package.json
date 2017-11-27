@@ -1,6 +1,6 @@
 {
   "name": "chilli-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A persomal toolkit achieve common modules again",
   "main": "lib/index.js",
   "keywords": [
@@ -22,9 +22,9 @@
     "fs-extra": "^4.0.2",
     "google-closure-compiler-js": "^20170910.0.1",
     "husky": "^0.14.3",
+    "istanbul": "^0.4.5",
     "lint-staged": "^5.0.0",
     "mocha": "*",
-    "nyc": "^11.3.0",
     "prettier": "^1.8.2",
     "promises-aplus-tests": "^2.1.2",
     "rollup": "^0.51.5",
@@ -36,9 +36,9 @@
   "scripts": {
     "dev": " cross-env NODE_ENV=DEV node ./tools/build/rollup.dev.js",
     "build": "rm -rf ./bundle && cross-env NODE_ENV=PROD node ./tools/build/rollup.prod.js --format:iife",
-    "test": "nyc --reporter text mocha test/**/*.test.js --bail --timeout 200 --slow 99999",
-    "report": "npm run test && rm -rf ./coverage && nyc report --reporter html",
-    "coverage": "npm run test && rm -rf ./coverage && nyc report --reporter lcov | coveralls",
+    "test": "istanbul cover node_modules/mocha/bin/_mocha test/**/*.test.js --bail --timeout 200 --slow 99999",
+    "report": "rm -rf ./coverage && npm run test -- --report html",
+    "coverage": "rm -rf ./coverage && npm run test -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "precommit": "lint-staged"
   },
   "lint-staged": {

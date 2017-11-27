@@ -1,13 +1,13 @@
 {
-  "name": "chilli",
+  "name": "chilli-toolkit",
   "version": "1.0.0",
   "description": "A persomal toolkit achieve common modules again",
-  "main": "index.js",
+  "main": "lib/index.js",
   "keywords": [
     "promise",
     "rollup"
   ],
-  "repository": "git@github.com:AsceticBoy/chilli.git",
+  "repository": "git@github.com:AsceticBoy/chilli-toolkit.git",
   "author": "Ascetic <398121373@qq.com>",
   "license": "MIT",
   "files": [

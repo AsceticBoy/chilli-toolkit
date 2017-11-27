@@ -1,7 +1,7 @@
 # chilli-toolkit
 [![NPM version](https://img.shields.io/badge/npm-5.3.0-blue.svg)](https://npmjs.org/package/chilli-toolkit)
 [![Build Status](https://travis-ci.org/AsceticBoy/chilli-toolkit.svg?branch=master)](https://travis-ci.org/AsceticBoy/chilli-toolkit)
-[![Coverage Status](https://img.shields.io/coveralls/dvajs/dva.svg?style=flat)](https://coveralls.io/r/dvajs/dva)
+[![Coverage Status](https://coveralls.io/repos/github/AsceticBoy/chilli-toolkit/badge.svg)](https://coveralls.io/github/AsceticBoy/chilli-toolkit)
 
 A persomal toolkit achieve common modules again include promise, stream, etc...
 

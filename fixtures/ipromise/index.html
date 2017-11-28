@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  </head>
+  <body>
+    <div id="root" class="root"></div>
+  </body>
+  <script type="text/javascript" src="../../bundle/chilli.js"></script>
+  <script type="text/javascript">
+    var ipromsie = new chilli.IPromise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve({data: 'success'})
+      }, 1000)
+    })
+    setTimeout(function () {
+      ipromsie.then(function (data) {
+        console.log(data)
+      }).catch(function (error) {
+        console.log(error)
+      })
+    }, 5000)
+  </script>
+</html>

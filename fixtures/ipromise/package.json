@@ -1,0 +1,11 @@
+{
+  "name": "ipromise-case",
+  "version": "1.0.0",
+  "description": "ipromise micro case",
+  "main": "index.js",
+  "author": "zwg",
+  "license": "MIT",
+  "dependencies": {
+    "chilli-toolkit": "^1.0.1"
+  }
+}

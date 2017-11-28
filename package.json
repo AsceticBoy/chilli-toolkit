@@ -1,8 +1,8 @@
 {
   "name": "chilli-toolkit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A persomal toolkit achieve common modules again",
-  "main": "lib/index.js",
+  "main": "bundle/chilli.js",
   "keywords": [
     "promise",
     "rollup"

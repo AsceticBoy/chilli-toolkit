@@ -1,5 +1,6 @@
 test
 .vscode
+fixtures
 bundle
 coverage
 node_modules

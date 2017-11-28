@@ -7,5 +7,11 @@
   "license": "MIT",
   "dependencies": {
     "chilli-toolkit": "^1.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^3.8.1"
+  },
+  "scripts": {
+    "dev": "webpack -c ./webpack.config.js --progress --colors"
   }
 }

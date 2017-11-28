@@ -39,6 +39,7 @@
     "test": "istanbul cover node_modules/mocha/bin/_mocha test/**/*.test.js --bail --timeout 200 --slow 99999",
     "report": "rm -rf ./coverage && npm run test -- --report html",
     "coverage": "rm -rf ./coverage && npm run test -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "prepublish": "npm run build",
     "precommit": "lint-staged"
   },
   "lint-staged": {

@@ -1,6 +1,6 @@
 {
   "name": "chilli-toolkit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A persomal toolkit achieve common modules again",
   "main": "bundle/chilli.js",
   "keywords": [
